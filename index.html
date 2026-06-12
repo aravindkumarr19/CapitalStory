@@ -3,540 +3,944 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Capital Story | Helping Professionals Become Industry Voices</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+<title>Capital Story — Helping Professionals Become Industry Voices</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 <style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-:root{
-    --primary:#1849A9;
-    --navy:#071B3B;
-    --light:#F7F9FC;
-    --text:#111827;
-    --muted:#6B7280;
-    --white:#ffffff;
-}
+  :root {
+    --blue: #066cf4;
+    --blue-dark: #0455c2;
+    --blue-light: #e8f1fe;
+    --white: #ffffff;
+    --black: #0a0a0a;
+    --gray: #f5f6f8;
+    --text-muted: #6b7280;
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+  html { scroll-behavior: smooth; }
 
-html{
-    scroll-behavior:smooth;
-}
+  body {
+    font-family: var(--font-body);
+    color: var(--black);
+    background: var(--white);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
 
-body{
-    font-family:'Inter',sans-serif;
-    background:var(--white);
-    color:var(--text);
-}
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 68px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(6,108,244,0.08);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 24px rgba(6,108,244,0.08); }
 
-.container{
-    width:90%;
-    max-width:1200px;
-    margin:auto;
-}
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--black);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+  }
+  .nav-logo span { color: var(--blue); }
 
-section{
-    padding:100px 0;
-}
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--black);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; }
 
-/* NAVBAR */
+  .nav-cta {
+    background: var(--blue);
+    color: var(--white) !important;
+    opacity: 1 !important;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-weight: 600 !important;
+    transition: background 0.2s, transform 0.15s !important;
+  }
+  .nav-cta:hover { background: var(--blue-dark) !important; transform: translateY(-1px); }
 
-nav{
-    position:fixed;
-    width:100%;
-    top:0;
-    background:rgba(255,255,255,.9);
-    backdrop-filter:blur(12px);
-    z-index:1000;
-    border-bottom:1px solid #eee;
-}
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
 
-.nav-container{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 0;
-}
+  .hero-bg-text {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display);
+    font-size: clamp(80px, 18vw, 220px);
+    font-weight: 800;
+    color: rgba(255,255,255,0.04);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: -4px;
+    user-select: none;
+  }
 
-.logo{
-    font-family:'Playfair Display',serif;
-    font-size:1.8rem;
-    color:var(--primary);
-    font-weight:700;
-}
+  .hero-content {
+    text-align: center;
+    max-width: 820px;
+    position: relative;
+    z-index: 2;
+  }
 
-.nav-links{
-    display:flex;
-    gap:30px;
-}
+  .hero-eyebrow {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.9);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
 
-.nav-links a{
-    text-decoration:none;
-    color:var(--text);
-    font-weight:500;
-}
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(42px, 7vw, 88px);
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.0;
+    letter-spacing: -2px;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
 
-.cta-btn{
-    background:var(--primary);
-    color:white;
-    text-decoration:none;
-    padding:12px 22px;
-    border-radius:10px;
-    font-weight:600;
-}
+  .hero-sub {
+    font-size: clamp(17px, 2.2vw, 21px);
+    color: rgba(255,255,255,0.78);
+    line-height: 1.65;
+    max-width: 560px;
+    margin: 0 auto 48px;
+    font-weight: 400;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
 
-/* HERO */
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
 
-.hero{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    background:
-    radial-gradient(circle at top right,
-    rgba(24,73,169,.15),
-    transparent 40%);
-}
+  .btn-primary {
+    background: var(--white);
+    color: var(--blue);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
 
-.hero-content{
-    text-align:center;
-}
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 14px 32px;
+    border-radius: 10px;
+    border: 1.5px solid rgba(255,255,255,0.35);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.08); }
 
-.hero h1{
-    font-size:5rem;
-    line-height:1;
-    font-family:'Playfair Display',serif;
-    color:var(--navy);
-    margin-bottom:25px;
-}
+  /* SCROLL INDICATOR */
+  .scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.4);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 1s 1.2s forwards;
+  }
+  .scroll-dot {
+    width: 1px;
+    height: 40px;
+    background: rgba(255,255,255,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  .scroll-dot::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.6);
+    animation: scrollLine 1.8s 1.4s infinite;
+  }
 
-.hero span{
-    color:var(--primary);
-}
+  /* PROBLEM */
+  .problem {
+    padding: 100px 48px;
+    background: var(--white);
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
 
-.hero p{
-    max-width:700px;
-    margin:auto;
-    color:var(--muted);
-    font-size:1.2rem;
-    line-height:1.7;
-}
+  .section-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 20px;
+  }
 
-.hero-buttons{
-    margin-top:40px;
-    display:flex;
-    justify-content:center;
-    gap:20px;
-}
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    color: var(--black);
+    margin-bottom: 24px;
+  }
 
-.primary-btn{
-    background:var(--primary);
-    color:white;
-    padding:16px 28px;
-    border-radius:12px;
-    text-decoration:none;
-    font-weight:600;
-}
+  .section-body {
+    font-size: 17px;
+    color: var(--text-muted);
+    line-height: 1.75;
+  }
 
-.secondary-btn{
-    border:1px solid var(--primary);
-    color:var(--primary);
-    padding:16px 28px;
-    border-radius:12px;
-    text-decoration:none;
-    font-weight:600;
-}
+  .problem-stat-card {
+    background: var(--blue);
+    border-radius: 20px;
+    padding: 48px;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  .problem-stat-card::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .problem-stat-card::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
 
-/* SECTION TITLES */
+  .stat-label {
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0.7;
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -2px;
+    margin-bottom: 12px;
+  }
+  .stat-desc {
+    font-size: 15px;
+    opacity: 0.75;
+    line-height: 1.6;
+  }
+  .stat-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.15);
+    margin: 28px 0;
+  }
+  .stat-tagline {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
 
-.section-title{
-    text-align:center;
-    margin-bottom:60px;
-}
+  /* VISIBILITY STATEMENT */
+  .visibility-section {
+    background: var(--gray);
+    padding: 100px 48px;
+    text-align: center;
+  }
+  .visibility-inner {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .visibility-section .section-title {
+    font-size: clamp(36px, 5.5vw, 68px);
+    margin-bottom: 16px;
+  }
+  .visibility-section .section-title span {
+    color: var(--blue);
+    position: relative;
+    display: inline-block;
+  }
+  .visibility-section .section-title span::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--blue);
+    border-radius: 2px;
+    opacity: 0.3;
+  }
+  .visibility-body {
+    font-size: 19px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 48px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-.section-title h2{
-    font-size:3rem;
-    color:var(--navy);
-    font-family:'Playfair Display',serif;
-}
+  /* FRAMEWORK */
+  .framework {
+    padding: 100px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .framework-header {
+    margin-bottom: 64px;
+  }
+  .framework-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: #e5e7eb;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .framework-step {
+    background: var(--white);
+    padding: 40px 32px;
+    position: relative;
+    transition: background 0.25s;
+  }
+  .framework-step:hover {
+    background: var(--blue);
+  }
+  .framework-step:hover .step-num,
+  .framework-step:hover .step-title,
+  .framework-step:hover .step-desc {
+    color: var(--white);
+  }
+  .framework-step:hover .step-num {
+    opacity: 0.4;
+  }
+  .step-num {
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--blue);
+    opacity: 0.15;
+    line-height: 1;
+    margin-bottom: 24px;
+    transition: color 0.25s, opacity 0.25s;
+  }
+  .step-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--black);
+    margin-bottom: 12px;
+    transition: color 0.25s;
+  }
+  .step-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    transition: color 0.25s;
+  }
 
-.section-title p{
-    color:var(--muted);
-    margin-top:15px;
-}
+  /* WHO WE WORK WITH */
+  .clients {
+    background: var(--blue);
+    padding: 100px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .clients::before {
+    content: 'WHO';
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--font-display);
+    font-size: 220px;
+    font-weight: 800;
+    color: rgba(255,255,255,0.04);
+    pointer-events: none;
+    line-height: 1;
+  }
+  .clients-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+  .clients-header {
+    margin-bottom: 56px;
+  }
+  .clients-header .section-eyebrow {
+    color: rgba(255,255,255,0.6);
+  }
+  .clients-header .section-title {
+    color: var(--white);
+  }
+  .clients-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .client-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px;
+    padding: 28px 28px;
+    transition: background 0.25s, border-color 0.25s, transform 0.25s;
+    cursor: default;
+  }
+  .client-card:hover {
+    background: rgba(255,255,255,0.14);
+    border-color: rgba(255,255,255,0.3);
+    transform: translateY(-3px);
+  }
+  .client-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    font-size: 18px;
+  }
+  .client-title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .client-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.55;
+  }
 
-/* PROBLEM */
+  /* MARQUEE / TICKER */
+  .ticker {
+    background: var(--black);
+    padding: 18px 0;
+    overflow: hidden;
+    display: flex;
+  }
+  .ticker-track {
+    display: flex;
+    gap: 0;
+    animation: ticker 25s linear infinite;
+    white-space: nowrap;
+  }
+  .ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 32px;
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .ticker-dot {
+    width: 5px;
+    height: 5px;
+    background: var(--blue);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
 
-.problem{
-    background:var(--light);
-    text-align:center;
-}
+  /* CTA */
+  .cta-section {
+    padding: 120px 48px;
+    text-align: center;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: -200px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(6,108,244,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+  .cta-section .section-title {
+    font-size: clamp(36px, 5vw, 64px);
+    margin-bottom: 20px;
+  }
+  .cta-section .section-body {
+    font-size: 18px;
+    margin-bottom: 40px;
+  }
+  .cta-email-row {
+    display: flex;
+    gap: 12px;
+    max-width: 480px;
+    margin: 0 auto 48px;
+  }
+  .cta-email-row input {
+    flex: 1;
+    padding: 14px 18px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .cta-email-row input:focus { border-color: var(--blue); }
+  .cta-email-row button {
+    background: var(--blue);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .cta-email-row button:hover { background: var(--blue-dark); transform: translateY(-1px); }
 
-.problem h3{
-    font-size:2.5rem;
-    margin-bottom:20px;
-}
+  .founder-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 0;
+  }
+  .founder-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .founder-info {
+    text-align: left;
+  }
+  .founder-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--black);
+  }
+  .founder-role {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
 
-.problem p{
-    max-width:800px;
-    margin:auto;
-    color:var(--muted);
-    line-height:1.8;
-}
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    padding: 56px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.5px;
+  }
+  .footer-logo span { color: var(--blue); }
+  .footer-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+  .footer-links a {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: rgba(255,255,255,0.8); }
+  .footer-copy {
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+  }
 
-/* FRAMEWORK */
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollLine {
+    0%   { top: -100%; }
+    100% { top: 100%; }
+  }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
 
-.framework-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:25px;
-}
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
 
-.framework-card{
-    background:white;
-    padding:40px;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,.06);
-    transition:.3s;
-}
-
-.framework-card:hover{
-    transform:translateY(-8px);
-}
-
-.framework-card h3{
-    color:var(--primary);
-    margin-bottom:15px;
-}
-
-/* SERVICES */
-
-.services{
-    background:var(--light);
-}
-
-.service-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:25px;
-}
-
-.service-card{
-    background:white;
-    padding:35px;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,.06);
-}
-
-.service-card h3{
-    margin-bottom:15px;
-    color:var(--navy);
-}
-
-/* STATS */
-
-.stats{
-    background:var(--navy);
-    color:white;
-}
-
-.stats-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    text-align:center;
-}
-
-.stat h2{
-    font-size:4rem;
-    margin-bottom:10px;
-}
-
-/* TESTIMONIAL */
-
-.testimonial{
-    text-align:center;
-}
-
-.quote{
-    max-width:800px;
-    margin:auto;
-    font-size:1.5rem;
-    line-height:1.8;
-    color:var(--muted);
-}
-
-/* CTA */
-
-.final-cta{
-    background:var(--primary);
-    color:white;
-    text-align:center;
-}
-
-.final-cta h2{
-    font-size:3rem;
-    margin-bottom:20px;
-}
-
-/* FOOTER */
-
-footer{
-    background:var(--navy);
-    color:white;
-    text-align:center;
-    padding:40px 0;
-}
-
-@media(max-width:900px){
-
-.hero h1{
-    font-size:3rem;
-}
-
-.framework-grid,
-.service-grid,
-.stats-grid{
-    grid-template-columns:1fr;
-}
-
-.hero-buttons{
-    flex-direction:column;
-}
-
-.nav-links{
-    display:none;
-}
-}
-
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 80px; }
+    .problem { grid-template-columns: 1fr; gap: 48px; padding: 72px 24px; }
+    .framework-grid { grid-template-columns: 1fr 1fr; }
+    .clients-grid { grid-template-columns: 1fr 1fr; }
+    .clients { padding: 72px 24px; }
+    .visibility-section { padding: 72px 24px; }
+    .framework { padding: 72px 24px; }
+    .cta-section { padding: 80px 24px; }
+    footer { padding: 40px 24px; flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 600px) {
+    .framework-grid { grid-template-columns: 1fr; }
+    .clients-grid { grid-template-columns: 1fr; }
+    .cta-email-row { flex-direction: column; }
+    .hero h1 { letter-spacing: -1px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
 </style>
 </head>
-
 <body>
 
-<nav>
-<div class="container nav-container">
-<div class="logo">Capital Story</div>
-
-<div class="nav-links">
-<a href="#">Home</a>
-<a href="#">Services</a>
-<a href="#">Framework</a>
-<a href="#">About</a>
-<a href="#">Contact</a>
-</div>
-
-<a href="#" class="cta-btn">Book a Call</a>
-</div>
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Capital <span>Story</span></a>
+  <ul class="nav-links">
+    <li><a href="#problem">The Problem</a></li>
+    <li><a href="#framework">Framework</a></li>
+    <li><a href="#clients">Who We Help</a></li>
+    <li><a href="#contact" class="nav-cta">Get Started</a></li>
+  </ul>
 </nav>
 
 <!-- HERO -->
-
 <section class="hero">
-<div class="container hero-content">
-
-<h1>
-Your Expertise<br>
-Deserves <span>Visibility.</span>
-</h1>
-
-<p>
-We help founders, investors, operators and finance professionals
-become recognized voices on LinkedIn through strategic thought
-leadership and authority building.
-</p>
-
-<div class="hero-buttons">
-<a href="#" class="primary-btn">Book Discovery Call</a>
-<a href="#" class="secondary-btn">Explore Framework</a>
-</div>
-
-</div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Personal Branding · LinkedIn · Thought Leadership</div>
+    <h1>Helping Professionals Become Industry Voices.</h1>
+    <p class="hero-sub">We turn your expertise into authority. From content strategy to visual identity — Capital Story manages every aspect of your professional presence on LinkedIn.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Build Your Authority →</a>
+      <a href="#framework" class="btn-outline">See How It Works</a>
+    </div>
+  </div>
+  <div class="hero-bg-text">CAPITAL STORY</div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-dot"></div>
+  </div>
 </section>
 
-<!-- PROBLEM -->
-
-<section class="problem">
-
-<div class="container">
-
-<h3>
-Expertise Creates Value.<br>
-Visibility Creates Opportunity.
-</h3>
-
-<p>
-Most professionals spend years building expertise.
-Yet without visibility, their insights never reach
-the clients, investors, partners and opportunities
-that matter.
-</p>
-
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="ticker-dot"></span>Position</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Articulate</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Publish</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Compound</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Expertise Creates Value</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Visibility Creates Opportunity</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Position</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Articulate</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Publish</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Compound</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Expertise Creates Value</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Visibility Creates Opportunity</div>
+  </div>
 </div>
 
+<!-- PROBLEM -->
+<section id="problem" style="background: var(--white); padding: 100px 48px;">
+  <div style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;" class="problem-wrap">
+    <div class="reveal">
+      <p class="section-eyebrow">The Problem</p>
+      <h2 class="section-title">Expertise alone doesn't build authority.</h2>
+      <p class="section-body" style="margin-bottom: 24px;">Most professionals spend years building real expertise. Yet without consistent visibility, their insights never reach the clients, partners, investors, and opportunities that matter.</p>
+      <p class="section-body">Their knowledge stays invisible to the people who need it most.</p>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="problem-stat-card">
+        <div class="stat-label">The Reality</div>
+        <div class="stat-number">9 in 10</div>
+        <div class="stat-desc">Professionals with genuine expertise have no consistent digital voice representing them.</div>
+        <div class="stat-divider"></div>
+        <div class="stat-tagline">Expertise creates value.<br>Visibility creates opportunity.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIBILITY STATEMENT -->
+<section class="visibility-section" id="about">
+  <div class="visibility-inner">
+    <p class="section-eyebrow reveal" style="text-align:center;">Why We Exist</p>
+    <h2 class="section-title reveal reveal-delay-1"><span>Visibility</span> does<br>what expertise alone cannot.</h2>
+    <p class="visibility-body reveal reveal-delay-2">Capital Story exists to bridge that gap — turning what you know into how you're known. We partner with founders, finance professionals, and business leaders to build credible, influential digital presences.</p>
+    <div class="reveal reveal-delay-3">
+      <a href="#contact" class="btn-primary" style="background: var(--blue); color: var(--white); display: inline-flex;">Start Building Authority →</a>
+    </div>
+  </div>
 </section>
 
 <!-- FRAMEWORK -->
-
-<section>
-
-<div class="container">
-
-<div class="section-title">
-<h2>The Capital Story Framework</h2>
-<p>Our proven process for building authority.</p>
-</div>
-
-<div class="framework-grid">
-
-<div class="framework-card">
-<h3>Position</h3>
-<p>Define what you should be known for.</p>
-</div>
-
-<div class="framework-card">
-<h3>Articulate</h3>
-<p>Turn expertise into compelling insights.</p>
-</div>
-
-<div class="framework-card">
-<h3>Publish</h3>
-<p>Create consistent visibility.</p>
-</div>
-
-<div class="framework-card">
-<h3>Compound</h3>
-<p>Build lasting authority over time.</p>
-</div>
-
-</div>
-
-</div>
-
+<section class="framework" id="framework">
+  <div class="framework-header reveal">
+    <p class="section-eyebrow">The Capital Story Framework</p>
+    <h2 class="section-title">How we build<br>your authority.</h2>
+  </div>
+  <div class="framework-grid reveal reveal-delay-1">
+    <div class="framework-step">
+      <div class="step-num">01</div>
+      <div class="step-title">Position</div>
+      <div class="step-desc">Define clearly what you should be known for — your niche, your voice, your angle.</div>
+    </div>
+    <div class="framework-step">
+      <div class="step-num">02</div>
+      <div class="step-title">Articulate</div>
+      <div class="step-desc">Convert your expertise into compelling insights, stories, and perspectives.</div>
+    </div>
+    <div class="framework-step">
+      <div class="step-num">03</div>
+      <div class="step-title">Publish</div>
+      <div class="step-desc">Build consistent visibility through thought leadership across LinkedIn.</div>
+    </div>
+    <div class="framework-step">
+      <div class="step-num">04</div>
+      <div class="step-title">Compound</div>
+      <div class="step-desc">Create lasting industry recognition that compounds over time.</div>
+    </div>
+  </div>
 </section>
 
-<!-- SERVICES -->
-
-<section class="services">
-
-<div class="container">
-
-<div class="section-title">
-<h2>What We Do</h2>
-</div>
-
-<div class="service-grid">
-
-<div class="service-card">
-<h3>LinkedIn Ghostwriting</h3>
-<p>Thought leadership content crafted around your expertise.</p>
-</div>
-
-<div class="service-card">
-<h3>Profile Positioning</h3>
-<p>Optimize your profile for credibility and authority.</p>
-</div>
-
-<div class="service-card">
-<h3>Personal Brand Strategy</h3>
-<p>Build a long-term authority engine that compounds.</p>
-</div>
-
-</div>
-
-</div>
-
+<!-- CLIENTS -->
+<section class="clients" id="clients">
+  <div class="clients-inner">
+    <div class="clients-header reveal">
+      <p class="section-eyebrow">Who We Work With</p>
+      <h2 class="section-title">Built for professionals<br>who lead their field.</h2>
+    </div>
+    <div class="clients-grid">
+      <div class="client-card reveal reveal-delay-1">
+        <div class="client-icon">🏗️</div>
+        <div class="client-title">Founders</div>
+        <div class="client-desc">Building companies, products, and teams — and the reputation to match.</div>
+      </div>
+      <div class="client-card reveal reveal-delay-2">
+        <div class="client-icon">📊</div>
+        <div class="client-title">Finance Professionals</div>
+        <div class="client-desc">Shaping decisions through financial expertise that deserves a wider audience.</div>
+      </div>
+      <div class="client-card reveal reveal-delay-3">
+        <div class="client-icon">💼</div>
+        <div class="client-title">Investors</div>
+        <div class="client-desc">Sharing insights, perspectives, and market conviction at scale.</div>
+      </div>
+      <div class="client-card reveal reveal-delay-1">
+        <div class="client-icon">🏦</div>
+        <div class="client-title">Wealth Managers</div>
+        <div class="client-desc">Building trust through visible knowledge and credibility.</div>
+      </div>
+      <div class="client-card reveal reveal-delay-2">
+        <div class="client-icon">⚙️</div>
+        <div class="client-title">Operators</div>
+        <div class="client-desc">Driving execution, growth, and business outcomes — with a voice to prove it.</div>
+      </div>
+      <div class="client-card reveal reveal-delay-3">
+        <div class="client-icon">🎯</div>
+        <div class="client-title">Business Leaders</div>
+        <div class="client-desc">Leading industries, organizations, and change with a recognised voice.</div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- STATS -->
-
-<section class="stats">
-
-<div class="container">
-
-<div class="stats-grid">
-
-<div class="stat">
-<h2>100+</h2>
-<p>Posts Created</p>
-</div>
-
-<div class="stat">
-<h2>1M+</h2>
-<p>Impressions Generated</p>
-</div>
-
-<div class="stat">
-<h2>20+</h2>
-<p>Professionals Branded</p>
-</div>
-
-</div>
-
-</div>
-
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-inner">
+    <p class="section-eyebrow reveal" style="text-align:center;">Let's Build Your Authority</p>
+    <h2 class="section-title reveal reveal-delay-1">Your expertise<br>deserves visibility.</h2>
+    <p class="section-body reveal reveal-delay-2">Reach out and let's talk about how Capital Story can help you become a recognised voice in your industry.</p>
+    <div class="cta-email-row reveal reveal-delay-3">
+      <input type="email" placeholder="Your email address">
+      <button onclick="alert('Thanks! Aravind will reach out shortly.')">Get in touch →</button>
+    </div>
+    <div class="founder-row reveal reveal-delay-4">
+      <div class="founder-avatar">AK</div>
+      <div class="founder-info">
+        <div class="founder-name">Aravind Kumar R</div>
+        <div class="founder-role">Founder, Capital Story · capitalstory1@gmail.com</div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- TESTIMONIAL -->
-
-<section class="testimonial">
-
-<div class="container">
-
-<div class="section-title">
-<h2>Client Impact</h2>
-</div>
-
-<p class="quote">
-“Capital Story helped us transform years of expertise
-into a consistent authority-building engine on LinkedIn.”
-</p>
-
-</div>
-
-</section>
-
-<!-- FINAL CTA -->
-
-<section class="final-cta">
-
-<div class="container">
-
-<h2>Your Expertise Deserves Visibility.</h2>
-
-<p>
-Let's build your authority together.
-</p>
-
-<br><br>
-
-<a href="#" class="primary-btn"
-style="background:white;color:#1849A9;">
-Book a Discovery Call
-</a>
-
-</div>
-
-</section>
-
+<!-- FOOTER -->
 <footer>
-
-<div class="container">
-
-<h3>Capital Story</h3>
-
-<p>
-Helping Professionals Become Industry Voices.
-</p>
-
-</div>
-
+  <div class="footer-logo">Capital <span>Story</span></div>
+  <ul class="footer-links">
+    <li><a href="#problem">The Problem</a></li>
+    <li><a href="#framework">Framework</a></li>
+    <li><a href="#clients">Who We Help</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <p class="footer-copy">© 2025 Capital Story. All rights reserved.</p>
 </footer>
 
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Responsive problem grid
+  function fixProblemGrid() {
+    const wrap = document.querySelector('.problem-wrap');
+    if (wrap) {
+      wrap.style.gridTemplateColumns = window.innerWidth < 900 ? '1fr' : '1fr 1fr';
+    }
+  }
+  fixProblemGrid();
+  window.addEventListener('resize', fixProblemGrid);
+</script>
 </body>
 </html>
